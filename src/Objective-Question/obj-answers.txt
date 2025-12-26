@@ -1,0 +1,92 @@
+#CHOICE
+    public class TestRoom {
+        TestDoor t = new TestDoor();
+        TestRoom() {}
+        public static void main(String[] args) {
+            TestRoom tt = new TestRoom();
+        }
+    }
+    class TestDoor {
+        TestRoom t = new TestRoom();
+        TestDoor() {}
+        public static void main(String[] args) {
+            TestDoor tt = new TestDoor();
+        }
+    }
+which one is correct?
+#OPTIONS
+A. It does not compile because there are two main()s in one .java file
+B. It does not compile because they refer to each other
+C. It compiles and runs smothly
+D. It compiles and raises exception at running for stack overflow
+#USER_ANSWER
+It does not compile because there are two main()s in one .java file
+#CORRECT_ANSWER
+It compiles and raises exception at running for stack overflow
+#END
+
+#JUDGE
+Multiple inheritances from classes is not allowed in Java.
+#OPTIONS
+1. T
+2. F
+#USER_ANSWER
+F
+#CORRECT_ANSWER
+T
+#END
+
+#CHOICE
+About access control in Java, which statement below is correct?
+#OPTIONS
+A. A member without any access modifier is default to private
+B. A member without any access modifier is default to public
+C. A member without any access modifier is default to protected
+D. Classes in the same package can access members without any access modifier.
+#USER_ANSWER
+A member without any access modifier is default to protected
+#CORRECT_ANSWER
+Classes in the same package can access members without any access modifier.
+#END
+
+#CHOICE
+    List<String> ls = new ArrayList<String>();
+    List<Object> lo = ls;
+    lo.add(new Object());
+    String s = ls.get(0);
+Which statement below is correct?
+#OPTIONS
+A. It does not compile
+B. It compiles but exception raises at line 2
+C. It compiles but exception raises at line 3
+D. It compiles but exception raises at line 4
+#USER_ANSWER
+
+#CORRECT_ANSWER
+It does not compile
+#END
+
+#JUDGE
+制造（new）数组时，要指定数组长度，以便为数组分配内存。
+#OPTIONS
+1. T
+2. F
+#USER_ANSWER
+F
+#CORRECT_ANSWER
+T
+#END
+
+#CHOICE
+About Java containers, which statement below is NOT correct?
+#OPTIONS
+A. ArrayList holds the elements in a particular sequence.
+B. TreeSet cannot have any duplicate elements.
+C. LinkedList holds the elements in a particular sequence.
+D. List, Set and Map, they all have stream() interface.
+#USER_ANSWER
+
+#CORRECT_ANSWER
+List, Set and Map, they all have stream() interface.
+#END
+

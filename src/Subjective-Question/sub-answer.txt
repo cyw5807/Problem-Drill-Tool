@@ -1,0 +1,8 @@
+#SUBJECTIVE
+ฤใบร
+#USER_ANSWER
+1. nihao
+#CORRECT_ANSWER
+1. ฤใบร
+#END
+
