@@ -90,3 +90,121 @@ D. List, Set and Map, they all have stream() interface.
 List, Set and Map, they all have stream() interface.
 #END
 
+#JUDGE
+枚举类型定义了具有删除功能的方法。
+#OPTIONS
+1. T
+2. F
+#USER_ANSWER
+T
+#CORRECT_ANSWER
+F
+#END
+
+#JUDGE
+read() in InputStream tries to read the next byte of data from the input stream, so it's returns type is byte.
+#OPTIONS
+1. T
+2. F
+#USER_ANSWER
+T
+#CORRECT_ANSWER
+F
+#END
+
+#JUDGE
+Arrays in Java can change its size as needed.
+#OPTIONS
+1. T
+2. F
+#USER_ANSWER
+T
+#CORRECT_ANSWER
+F
+#END
+
+#JUDGE
+We can use an interface as a data type for a variable.
+#OPTIONS
+1. T
+2. F
+#USER_ANSWER
+F
+#CORRECT_ANSWER
+T
+#END
+
+#CHOICE
+    interface I {
+        void f();
+    }
+    class C {
+        void f() {};
+    }
+Which code below compiles?
+#OPTIONS
+A. class A extends I { void f(); }
+B. interface A extends I { void f(); }
+C. class A extends C implements I {}
+D. interface A implements I { void f(); }
+#USER_ANSWER
+class A extends C implements I {}
+#CORRECT_ANSWER
+interface A extends I { void f(); }
+#END
+
+#CHOICE
+What must be done when throwing an integer as an exception?
+#OPTIONS
+A. Integers cannot be thrown.
+B. Declare integers as throwable.
+C. Import the exception class.
+D. Encapsulate the integer handler
+#USER_ANSWER
+Encapsulate the integer handler
+#CORRECT_ANSWER
+Integers cannot be thrown.
+#END
+
+#JUDGE
+There is a length() method for all the arrays to represent the number of elements
+#OPTIONS
+1. T
+2. F
+#USER_ANSWER
+T
+#CORRECT_ANSWER
+F
+#END
+
+#CHOICE
+    class DataServer extends Server {
+        public String serverName;
+        public DataServer() {
+            serverName = "Customer Service";
+            super(serverName);
+        }
+    }
+Which statement is right?
+#OPTIONS
+A. Code can pass the compilation
+B. Code can pass the compilation but a fault would happen in creating object of DataServer
+C. Code can NOT pass the compilation for the error in the 2nd line
+D. Code can NOT pass the compilation for the error in the 5th line
+#USER_ANSWER
+Code can pass the compilation
+#CORRECT_ANSWER
+Code can NOT pass the compilation for the error in the 5th line
+#END
+
+#JUDGE
+Objects created in JAVA do not need to be deleted or freed by the programmer.
+#OPTIONS
+1. T
+2. F
+#USER_ANSWER
+F
+#CORRECT_ANSWER
+T
+#END
+
