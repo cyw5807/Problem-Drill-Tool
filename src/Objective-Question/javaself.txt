@@ -17,6 +17,15 @@ F
 #END
 
 #JUDGE
+在Java中，String s = null; s += "abc"; 执行后s的值为"nullabc"，且不会抛出NullPointerException。
+#OPTIONS
+T
+F
+#CORRECT
+1
+#END
+
+#JUDGE
 byte b = 10; b = b + 1; 会导致编译错误，但是
 byte b = 10; b += 1;    可以正常编译运行。
 #OPTIONS
@@ -58,7 +67,7 @@ F
             System.out.println(Math.floor(x) + ", " + Math.ceil(x) + ", " + Math.round(x));
         }
     }
-这段 java 代码的输出是 9.0, 10.0, 10.0
+这段 java 代码运行后的输出是 9.0, 10.0, 10.0
 #OPTIONS
 T
 F
@@ -86,9 +95,13 @@ F
 #END
 
 #JUDGE
-    Integer a = 1;
-    Integer b = 1;
-    System.out.println(a == b);
+    public class Main {
+        public static void main(String[] args) {
+            Integer a = 1;
+            Integer b = 1;
+            System.out.println(a == b);
+        }
+    }
 由于没有用 int 而是使用了 Integer 这个包装类，a 和 b 两者没有指向同一个对象。
 因此这段 java 的输出是 false.
 #OPTIONS
@@ -99,7 +112,7 @@ F
 #END
 
 #JUDGE
-重写方法必须与被重写方法具有相同的返回类型，且不能降低原方法的访问权限
+重写方法必须与被重写方法具有完全一致的返回类型，且不能降低原方法的访问权限
 #OPTIONS
 T
 F
@@ -108,22 +121,22 @@ F
 #END
 
 #JUDGE
-class Parent {
-    private void secret() { System.out.println("Parent secret"); }
-    public void callSecret() { 
-        secret();
+    class Parent {
+        private void secret() { System.out.println("Parent secret"); }
+        public void callSecret() { 
+            secret();
+        }
     }
-}
-class Child extends Parent {
-    private void secret() { System.out.println("Child secret"); }
-}
-public class Test {
-    public static void main(String[] args) {
-        Child c = new Child();
-        c.callSecret();
+    class Child extends Parent {
+        private void secret() { System.out.println("Child secret"); }
     }
-}
-由于 callSecret() 中调用的函数在 Child 子类中实现了，因此输出为 Child secret
+    public class Test {
+        public static void main(String[] args) {
+            Child c = new Child();
+            c.callSecret();
+        }
+    }
+这段 java 代码运行后的输出是 Child secret
 #OPTIONS
 T
 F
@@ -132,7 +145,25 @@ F
 #END
 
 #JUDGE
-判断题例题
+抽象类不能被实例化，所以抽象类中不能定义构造方法。
+#OPTIONS
+T
+F
+#CORRECT
+2
+#END
+
+#JUDGE
+DataInputStream 可以读取由 PrintWriter 创建的文本文件中的整数。
+#OPTIONS
+T
+F
+#CORRECT
+2
+#END
+
+#JUDGE
+Error类及其子类表示的程序错误通常是致命的，程序无法恢复，我们一般不捕获和处理它们
 #OPTIONS
 T
 F
@@ -141,12 +172,30 @@ F
 #END
 
 #JUDGE
-判断题例题
+static 变量即使不被 transient 修饰，也不会被序列化。
 #OPTIONS
 T
 F
 #CORRECT
 1
+#END
+
+#JUDGE
+synchronized 关键字可以修饰一个非静态方法，当一个线程调用该对象的此方法时，会锁定这个对象本身
+#OPTIONS
+T
+F
+#CORRECT
+1
+#END
+
+#JUDGE
+volatile 关键字可以保证变量的原子性操作（例如 count++）。
+#OPTIONS
+T
+F
+#CORRECT
+2
 #END
 
 #CHOICE
@@ -176,18 +225,18 @@ F
 #CHOICE
 执行以下代码，输出是什么？
     class Main{
-        public static void main(string[] args){
+        public static void main(String[] args){
             String s1 ="Zhejiang University";
             String s2 = s1.substring(0, 7);
-            s2.toUppercase();
+            s2.toUpperCase();
             System.out.println(s2+s1.substring(8));
         }
     }
 #OPTIONS
 Zhejian University
-ZhejiaG UNIVERSITY
-Zhejian UNIVERSITY
-编译错误
+ZHEJIANG University
+ZHEJIAN University
+ZHEJIANGUniversity
 #CORRECT
 1
 #END
@@ -235,32 +284,6 @@ this只能用于引用静态变量
 #END
 
 #CHOICE
-public class Main {
-    public static void main(String[] args) {
-        String s1 = new String("helloworld"); 
-        String s2 = s1.intern(); 
-        String s3 = "helloworld"; 
-        
-        System.out.println(s1 == s3);
-        
-        String s4 = new String("Hello") + new String("World");
-        String s5 = s4.intern();
-        String s6 = "HelloWorld";
-        
-        System.out.println(s4 == s6);
-    }
-}
-在 JDK 1.7+ 版本中，输出结果中有几个 true ?
-#OPTIONS
-编译错误
-0
-1
-2
-#CORRECT
-3
-#END
-
-#CHOICE
     class Base1 {
         public int a = 1;
         public Base1(){
@@ -296,46 +319,63 @@ public class Main {
 #END
 
 #CHOICE
-选择题例题
+下列代码的输出是：
+    interface I {
+        default void print() {
+            System.out.print("I ");
+        }
+    }
+    class A implements I {
+        public void print() {
+            System.out.print("A ");
+        }
+    }
+    class B extends A implements I {
+    }
+    public class Main {
+        public static void main(String[] args) {
+            I obj = new B();
+            obj.print();
+        }
+    }
 #OPTIONS
-选项1
-选项2
-选项3
-选项4
+I
+A
+编译错误
+运行时异常
 #CORRECT
-1
+2
 #END
 
 #CHOICE
-选择题例题
+关于 throw 和 throws，说法正确的是？ 
 #OPTIONS
-选项1
-选项2
-选项3
-选项4
+throw 用于声明方法可能抛出的异常
+throws 用于在方法体内抛出一个异常对象
+一个方法可以 throws 多个异常，用逗号隔开
+throw 后面跟的是异常类名，而不是对象
 #CORRECT
-1
+3
 #END
 
 #CHOICE
-选择题例题
+下面哪行代码正确创建了一个用于写入二进制数据的流？
 #OPTIONS
-选项1
-选项2
-选项3
-选项4
+new PrintWriter("test.txt") 
+new DataOutputStream(new FileOutputStream("test.dat"))
+new DataOutputStream(new File("test.dat"))
+new FileWriter("test.dat")
 #CORRECT
-1
+2
 #END
 
 #CHOICE
-选择题例题
+在以下哪种情况下，线程会抛出 InterruptedException？
 #OPTIONS
-选项1
-选项2
-选项3
-选项4
+调用 thread.interrupt() 时。
+线程正在执行 synchronized 方法时被中断。
+线程处于 RUNNABLE 状态时被中断。
+线程因调用 sleep() 而阻塞时被中断。
 #CORRECT
-1
+4
 #END
-
