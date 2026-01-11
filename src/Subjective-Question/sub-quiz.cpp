@@ -19,7 +19,7 @@ vector<Question> loadQuestions(const string& filename) {
     vector<Question> questions;
     ifstream file(filename);
     if (!file) {
-        cerr << "无法打开文件: " << filename << endl;
+        cerr << "Unable to open file: " << filename << endl;
         return questions;
     }
 
@@ -57,7 +57,7 @@ vector<Question> loadQuestions(const string& filename) {
 void writeAnswerToFile(const Question& q, const vector<string>& userAnswers) {
     ofstream answerFile("sub-answer.txt", ios::app);
     if (!answerFile) {
-        cerr << "无法打开 sub-answer.txt 进行写入\n";
+        cerr << "Unable to open sub-answer.txt\n";
         return;
     }
 
@@ -87,8 +87,8 @@ void quizMode(vector<Question>& questions, bool randomOrder) {
 
     for (size_t i = 0; i < questions.size(); ++i) {
         const auto& q = questions[i];
-        cout << "\n问题 " << i + 1 << " 题:\n";
-        cout << "[主观题]\n";
+        cout << "\nQuestion " << i + 1 << ":\n";
+        cout << "[Subjective Question]\n";
 
         int code_line = 0;
         for (size_t j = 0; j < q.question.size(); ++j) {
@@ -101,7 +101,7 @@ void quizMode(vector<Question>& questions, bool randomOrder) {
             }
         }
         
-        cout << "\n请输入你的回答要点（每行一个，空行结束）:\n";
+        cout << "\nPlease enter the main points of your response (one per line, end with a blank line):\n";
         vector<string> userAnswers;
         string line;
         for (int cnt = 1;; ++cnt) {
@@ -112,13 +112,13 @@ void quizMode(vector<Question>& questions, bool randomOrder) {
         }
 
         // 显示用户答案
-        cout << "\n你的答案:\n";
+        cout << "\nYour Answer:\n";
         for (const auto& ans : userAnswers) {
             cout << ans << "\n";
         }
 
         // 显示参考答案
-        cout << "\n参考答案:\n";
+        cout << "\nReference Answer:\n";
         for (const auto& ans : q.answers) {
             cout << ans << "\n";
         }
@@ -127,15 +127,15 @@ void quizMode(vector<Question>& questions, bool randomOrder) {
         writeAnswerToFile(q, userAnswers);
     }
 
-    cout << "\n测验结束，答案已保存到 sub-answer.txt\n";
-    cout << "按[ENTER]键退出...";
+    cout << "\nquiz over, and your answers are saved to sub-answer.txt\n";
+    cout << "press [ENTER] to exit...";
     getchar();
 }
 
 
 int main() {
     string filename;
-    cout << "请输入题库文件名: ";
+    cout << "Please enter the question bank filename: ";
     getline(cin, filename);
     if (filename.size() < 4 || filename.substr(filename.size() - 4) != ".txt") {
         filename += ".txt";
@@ -143,12 +143,12 @@ int main() {
     vector<Question> questions = loadQuestions(filename);
     
     if (questions.empty()) {
-        cout << "没有找到题目，请使用 sub-insert.cpp 添加题目\n";
+        cout << "No questions found, please use sub-insert.cpp to add questions\n";
         return 1;
     }
 
     string mode;
-    cout << "请选择答题模式:\n1. 顺序答题\n2. 随机答题\n请选择: ";
+    cout << "Please select quiz mode:\n1. Sequential Quiz\n2. Random Quiz\nPlease choose: ";
     getline(cin, mode);
 
     quizMode(questions, mode[0] == '2');

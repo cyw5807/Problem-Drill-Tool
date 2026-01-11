@@ -43,7 +43,7 @@ vector<Question> loadQuestions(const string& filename) {
     vector<Question> questions;
     ifstream file(filename);
     if (!file) {
-        cerr << "无法读取文件: " << filename << endl;
+        cerr << "Unable to read file: " << filename << endl;
         return questions;
     }
 
@@ -108,7 +108,7 @@ vector<Question> loadQuestions(const string& filename) {
 void writeAnswerToFile(const Question& q, const vector<int>& userAnswers) {
     ofstream answerFile("obj-answers.txt", ios::app);
     if (!answerFile) {
-        cerr << "无法创建 obj-answers.txt 并写入！\n";
+        cerr << "Unable to create obj-answers.txt\n";
         return;
     }
 
@@ -220,13 +220,13 @@ void quizMode(vector<Question>& questions, bool randomOrder) {
 
     for (size_t i = 0; i < questions.size(); ++i) {
         const auto& q = questions[i];
-        cout << "\n问题 " << i + 1 << " / " << questions.size() << "\n\n";
+        cout << "\nQuestion " << i + 1 << " / " << questions.size() << "\n\n";
         
         // 显示问题内容（多行）
         string typeStr;
-        if (q.type == "JUDGE") typeStr = "[判断题]";
-        else if (q.type == "CHOICE") typeStr = "[选择题]";
-        else if (q.type == "MULTICHOICE") typeStr = "[多选题]";
+        if (q.type == "JUDGE") typeStr = "[Judge/判断题]";
+        else if (q.type == "CHOICE") typeStr = "[Choice/选择题]";
+        else if (q.type == "MULTICHOICE") typeStr = "[Multi-choice/多选题]";
         cout << typeStr << "\n";
 
         int code_line = 0;
@@ -240,7 +240,7 @@ void quizMode(vector<Question>& questions, bool randomOrder) {
             }
         }
 
-        cout << "\n选项：\n";
+        cout << "\nOptions:\n";
         
         // 生成选项索引并打乱
         vector<int> optionIndices(q.options.size());
@@ -264,7 +264,7 @@ void quizMode(vector<Question>& questions, bool randomOrder) {
         
         // 获取用户答案
         vector<int> userAnswers;
-        cout << "\n请输入答案" << (q.type == "MULTICHOICE" ? "（多选用半角逗号分隔）" : "") << "：";
+        cout << "\nPlease enter the answer" << (q.type == "MULTICHOICE" ? " (separate multiple answers with [,])" : "") << ": ";
         string ansInput;
         getline(cin, ansInput);
         
@@ -281,13 +281,13 @@ void quizMode(vector<Question>& questions, bool randomOrder) {
         // 显示正确与否
         if (isCorrect) {
             setColor(10);  // 绿色
-            cout << "\n正确！\n";
+            cout << "\nCorrect!\n";
             setColor(7);   // 恢复默认颜色
             correctCount++;
         } else {
             setColor(12);  // 红色
-            cout << "\n错误！";
-            cout << "正确答案：";
+            cout << "\nIncorrect!";
+            cout << "Correct Answer: ";
             for (size_t j = 0; j < q.correctAnswers.size(); ++j) {
                 if (j > 0) cout << ",";
                 // 找到正确答案在打乱后的索引位置
@@ -308,17 +308,17 @@ void quizMode(vector<Question>& questions, bool randomOrder) {
         cout << endl;
     }
 
-    cout << "\n答题结束，正确 " << correctCount << " 题，共 " << totalQuestions << " 题。";
-    cout << "正确率: " << (correctCount * 100.0 / totalQuestions) << "%\n";
+    cout << "\nQuiz over, correct " << correctCount << " questions out of " << totalQuestions << ".";
+    cout << " Accuracy: " << (correctCount * 100.0 / totalQuestions) << "%\n";
 
-    cout << "\n错误答案已记录到 obj-answers.txt\n";
-    cout << "按[ENTER]退出...";
+    cout << "\nIncorrect answers have been recorded in obj-answers.txt\n";
+    cout << "Press [ENTER] to exit...";
     getchar();
 }
 
 int main() {
     string filename;
-    cout << "请输入题库文件名：";
+    cout << "Please enter the question bank filename: ";
     getline(cin, filename);
     // 如果 filename 不是.txt结尾，则添加
     if (filename.size() < 4 || filename.substr(filename.size() - 4) != ".txt") {
@@ -326,12 +326,12 @@ int main() {
     }
     vector<Question> questions = loadQuestions(filename);
     if (questions.empty()) {
-        cout << "未找到问题，请使用 obj-insert.cpp 添加问题\n";
+        cout << "No questions found, please use obj-insert.cpp to add questions\n";
         return 1;
     }
 
     string mode;
-    cout << "请选择模式：\n1. 顺序答题\n2. 随机答题\n请输入选项：";
+    cout << "Please select mode:\n1. Sequential Quiz\n2. Random Quiz\nPlease choose: ";
     getline(cin, mode);
 
     quizMode(questions, mode[0] == '2');
