@@ -56,6 +56,7 @@ g++ sub-quiz.cpp -o sub-quiz
 
 ## 技术特点
 
+- **采用 GB2312 编码**
 - 纯C++实现，无需额外依赖
 - 文件格式简单，易于维护
 - 支持Windows/Linux/Mac平台

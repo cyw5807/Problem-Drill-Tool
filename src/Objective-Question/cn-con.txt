@@ -16,10 +16,10 @@ II.重负载下信道利用率高
 III.节点可以一直持有令牌，直至所要发送的数据传输完毕
 IV.节点只能持有令牌一段固定的时间，对于没有数据要发送的节点也是如此
 #OPTIONS
-A.仅 I、II 和 III
-B.仅 III
-C.仅 III 和 IV
-D.仅 IV
+仅 I、II 和 III
+仅 III
+仅 III 和 IV
+仅 IV
 #CORRECT
 3
 #END
